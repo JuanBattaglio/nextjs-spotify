@@ -21,9 +21,6 @@ export default function Home() {
   return (
       <>
         🎵 Spotify Taste Mixer
-        Crea playlists personalizadas con tus preferencias musicales
-        
-          Iniciar sesión con Spotify
       </>  
       
   );
