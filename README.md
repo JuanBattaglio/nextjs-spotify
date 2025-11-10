@@ -142,15 +142,15 @@ Usuario → Login → Spotify OAuth → Callback → Token Exchange → Dashboar
 
 ### Código Proporcionado
 
-#### 1. API Route: `src/app/api/spotify-token/route.js`
+#### 1. API Route: `spotify/src/app/api/spotify-token/route.js`
 
-#### 2. API Route: `src/app/api/refresh-token/route.js`
+#### 2. API Route: `spotify/src/app/api/refresh-token/route.js`
 
-#### 3. Utilidad de Auth: `src/lib/auth.js`
+#### 3. Utilidad de Auth: `spotify/src/lib/auth.js`
 
-#### 4. Página de Login: `app/page.js`
+#### 4. Página de Login: `spotify/app/page.js`
 
-#### 5. Página de Callback: `app/auth/callback/page.js`
+#### 5. Página de Callback: `spotify/app/auth/callback/page.js`
 
 ## 🧩 Widgets a Implementar
 
