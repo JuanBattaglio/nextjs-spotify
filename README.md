@@ -10,7 +10,6 @@ Aplicación web que genera playlists personalizadas de Spotify basándose en las
 - [Autenticación OAuth](#autenticación-oauth)
 - [Widgets a Implementar](#widgets-a-implementar)
 - [API de Spotify](#api-de-spotify)
-- [Criterios de Evaluación](#criterios-de-evaluación)
 - [Recursos Útiles](#recursos-útiles)
 
 ---
