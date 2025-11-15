@@ -120,6 +120,7 @@ Crea un archivo `.env.local` en la raíz del proyecto:
 ```bash
 SPOTIFY_CLIENT_ID=tu_client_id_aqui
 SPOTIFY_CLIENT_SECRET=tu_client_secret_aqui
+NEXT_PUBLIC_SPOTIFY_CLIENT_ID=tu_client_id_aqui
 NEXT_PUBLIC_REDIRECT_URI=http://127.0.0.1:3000/auth/callback
 ```
 

@@ -29,15 +29,15 @@ export default function CallbackPage() {
     }
 
     // Validar state para prevenir CSRF
-    const savedState = sessionStorage.getItem('spotify_auth_state');
+    const savedState = localStorage.getItem('spotify_auth_state');
     if (!state || state !== savedState) {
       setError('Error de validación de seguridad (CSRF). Intenta iniciar sesión de nuevo.');
-      sessionStorage.removeItem('spotify_auth_state');
+      localStorageStorage.removeItem('spotify_auth_state');
       return;
     }
 
     // Limpiar state después de validar
-    sessionStorage.removeItem('spotify_auth_state');
+    localStorage.removeItem('spotify_auth_state');
 
     // Marcar como procesado
     hasProcessed.current = true;
