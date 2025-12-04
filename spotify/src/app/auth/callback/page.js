@@ -1,100 +1,83 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { saveTokens } from '@/lib/auth';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { isAuthenticated } from '@/lib/auth';
+import Header from '@/components/Header';
+import GenreWidget from '@/components/widgets/GenreWidget';
+import DecadeWidget from '@/components/widgets/DecadeWidget';
+import MoodWidget from '@/components/widgets/MoodWidget';
+import PopularityWidget from '@/components/widgets/PopularityWidget';
+import ArtistWidget from '@/components/widgets/ArtistWidget';
+import PlaylistDisplay from '@/components/PlaylistDisplay';
 
-export default function CallbackPage() {
+export default function Dashboard() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [error, setError] = useState(null);
-  const hasProcessed = useRef(false);
+  
+  // Estados de todos los widgets
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedDecades, setSelectedDecades] = useState([]);
+  const [moodValues, setMoodValues] = useState({});
+  const [popularityValues, setPopularityValues] = useState({});
+  const [selectedArtists, setSelectedArtists] = useState([]);
 
   useEffect(() => {
-    // Prevenir ejecución duplicada
-    if (hasProcessed.current) return;
-
-    const code = searchParams.get('code');
-    const state = searchParams.get('state');
-    const errorParam = searchParams.get('error');
-
-    if (errorParam) {
-      setError('Autenticación cancelada');
-      return;
+    if (!isAuthenticated()) {
+      router.push('/');
     }
+  }, [router]);
 
-    if (!code) {
-      setError('No se recibió código de autorización');
-      return;
-    }
-
-    // Validar state para prevenir CSRF
-    const savedState = localStorage.getItem('spotify_auth_state');
-    if (!state || state !== savedState) {
-      setError('Error de validación de seguridad (CSRF). Intenta iniciar sesión de nuevo.');
-      localStorage.removeItem('spotify_auth_state');
-      return;
-    }
-
-    // Limpiar state después de validar
-    localStorage.removeItem('spotify_auth_state');
-
-    // Marcar como procesado
-    hasProcessed.current = true;
-
-    // Intercambiar código por token
-    const exchangeCodeForToken = async (code) => {
-      try {
-        const response = await fetch('/api/spotify-token', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Error al obtener token');
-        }
-
-        // Guardar tokens
-        saveTokens(data.access_token, data.refresh_token, data.expires_in);
-
-        // Redirigir al dashboard
-        router.push('/dashboard');
-
-      } catch (error) {
-        console.error('Error:', error);
-        setError(error.message);
-      }
-    };
-
-    exchangeCodeForToken(code);
-  }, [searchParams, router]);
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-500 mb-4">Error</h1>
-          <p className="text-white mb-6">{error}</p>
-          <button
-            onClick={() => router.push('/')}
-            className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700"
-          >
-            Volver al inicio
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // Combinar todas las preferencias
+  const preferences = {
+    genres: selectedGenres,
+    decades: selectedDecades,
+    mood: moodValues,
+    popularity: popularityValues,
+    artists: selectedArtists
+  };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4"></div>
-        <p className="text-white text-xl">Autenticando...</p>
-      </div>
-    </div>
+    <>
+      <Header />
+      
+      <main className="min-h-screen bg-[#121212] py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-white mb-6">
+            Genera tu Playlist
+          </h2>
+          
+          {/* Widgets Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <ArtistWidget 
+              onSelect={setSelectedArtists}
+              selectedItems={selectedArtists}
+            />
+
+            <GenreWidget 
+              onSelect={setSelectedGenres}
+              selectedItems={selectedGenres}
+            />
+            
+            <DecadeWidget 
+              onSelect={setSelectedDecades}
+              selectedItems={selectedDecades}
+            />
+
+            <MoodWidget 
+              onSelect={setMoodValues}
+              selectedItems={moodValues}
+            />
+
+            <PopularityWidget 
+              onSelect={setPopularityValues}
+              selectedItems={popularityValues}
+            />
+          </div>
+
+          {/* Playlist Display */}
+          <PlaylistDisplay preferences={preferences} />
+        </div>
+      </main>
+    </>
   );
 }

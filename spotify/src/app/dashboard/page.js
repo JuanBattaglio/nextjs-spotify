@@ -1,15 +1,24 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { isAuthenticated } from '@/lib/auth';
 import Header from '@/components/Header';
+import GenreWidget from '@/components/widgets/GenreWidget';
+import DecadeWidget from '@/components/widgets/DecadeWidget';
+import MoodWidget from '@/components/widgets/MoodWidget';
+import PopularityWidget from '@/components/widgets/PopularityWidget';
+import ArtistWidget from '@/components/widgets/ArtistWidget';
 
 export default function Dashboard() {
   const router = useRouter();
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedDecades, setSelectedDecades] = useState([]);
+  const [moodValues, setMoodValues] = useState({});
+  const [popularityValues, setPopularityValues] = useState({});
+  const [selectedArtists, setSelectedArtists] = useState([]);
 
   useEffect(() => {
-    // Si NO está autenticado, redirigir al login
     if (!isAuthenticated()) {
       router.push('/');
     }
@@ -17,20 +26,38 @@ export default function Dashboard() {
 
   return (
     <>
-      <Header />
-      
-      <main className="min-h-screen bg-[#121212] pt-6">
+      <main className="min-h-screen bg-[#121212] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white mb-6">
-            Mi Dashboard
+            Genera tu Playlist
           </h2>
           
-          {/* Aquí irán los widgets después */}
-          <div className="text-white">
-            <p>Dashboard funcionando! 🎉</p>
-            <p className="text-gray-400 mt-2">
-              Próximamente: widgets y generador de playlists
-            </p>
+          {/* Widgets Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <GenreWidget 
+              onSelect={setSelectedGenres}
+              selectedItems={selectedGenres}
+            />
+            
+            <DecadeWidget 
+              onSelect={setSelectedDecades}
+              selectedItems={selectedDecades}
+            />
+
+            <MoodWidget 
+              onSelect={setMoodValues}
+              selectedItems={moodValues}
+            />
+
+            <PopularityWidget 
+              onSelect={setPopularityValues}
+              selectedItems={popularityValues}
+            />
+
+            <ArtistWidget 
+              onSelect={setSelectedArtists}
+              selectedItems={selectedArtists}
+            />
           </div>
         </div>
       </main>
