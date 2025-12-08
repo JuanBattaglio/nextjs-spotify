@@ -9,6 +9,7 @@ import DecadeWidget from '@/components/widgets/DecadeWidget';
 import MoodWidget from '@/components/widgets/MoodWidget';
 import PopularityWidget from '@/components/widgets/PopularityWidget';
 import ArtistWidget from '@/components/widgets/ArtistWidget';
+import PlaylistDisplay from '@/components/PlaylistDisplay'; // ← AÑADIR ESTA LÍNEA
 
 export default function Dashboard() {
   const router = useRouter();
@@ -22,18 +23,34 @@ export default function Dashboard() {
     if (!isAuthenticated()) {
       router.push('/');
     }
-  }, [router]);
+  }, []);  // ← CAMBIO: array vacío para evitar loops
+
+  // Combinar todas las preferencias
+  const preferences = {
+    genres: selectedGenres,
+    decades: selectedDecades,
+    mood: moodValues,
+    popularity: popularityValues,
+    artists: selectedArtists
+  };
 
   return (
     <>
+      <Header /> 
+      
       <main className="min-h-screen bg-[#121212] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white mb-6">
             Genera tu Playlist
           </h2>
-          <Header />
+          
           {/* Widgets Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <ArtistWidget 
+              onSelect={setSelectedArtists}
+              selectedItems={selectedArtists}
+            />
+
             <GenreWidget 
               onSelect={setSelectedGenres}
               selectedItems={selectedGenres}
@@ -53,12 +70,9 @@ export default function Dashboard() {
               onSelect={setPopularityValues}
               selectedItems={popularityValues}
             />
-
-            <ArtistWidget 
-              onSelect={setSelectedArtists}
-              selectedItems={selectedArtists}
-            />
           </div>
+
+          <PlaylistDisplay preferences={preferences} />
         </div>
       </main>
     </>

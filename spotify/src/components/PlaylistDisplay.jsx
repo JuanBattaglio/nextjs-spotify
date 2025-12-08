@@ -18,6 +18,10 @@ export default function PlaylistDisplay({ preferences }) {
 
   // Generar playlist basada en preferencias
   const generatePlaylist = async () => {
+
+    console.log('🎵 INICIO - Generando playlist...');
+    console.log('Preferences recibidas:', preferences);
+    console.log('Token disponible:', getAccessToken());
     setLoading(true);
     setError(null);
     
