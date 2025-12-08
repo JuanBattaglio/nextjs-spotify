@@ -31,7 +31,7 @@ export default function Dashboard() {
           <h2 className="text-3xl font-bold text-white mb-6">
             Genera tu Playlist
           </h2>
-          
+          <Header />
           {/* Widgets Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             <GenreWidget 
