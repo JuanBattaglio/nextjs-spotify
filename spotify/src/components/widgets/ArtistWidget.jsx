@@ -111,7 +111,7 @@ export default function ArtistWidget({ onSelect, selectedItems = [] }) {
         {selectedItems.length} / {MAX_SELECTIONS} artistas seleccionados
       </p>
 
-      {/* Search Input */}
+      {/* buscador */}
       <div className="mb-4">
         <input
           type="text"
@@ -122,7 +122,7 @@ export default function ArtistWidget({ onSelect, selectedItems = [] }) {
         />
       </div>
 
-      {/* Selected Artists */}
+      {/* seleccionar artista*/}
       {selectedItems.length > 0 && (
         <div className="mb-4">
           <p className="text-gray-400 text-sm mb-2">Seleccionados:</p>
@@ -158,7 +158,7 @@ export default function ArtistWidget({ onSelect, selectedItems = [] }) {
         </div>
       )}
 
-      {/* Search Results */}
+      {/* resultados*/}
       <div className="max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
         {loading && (
           <div className="flex items-center justify-center py-8">
@@ -193,7 +193,7 @@ export default function ArtistWidget({ onSelect, selectedItems = [] }) {
                       : 'bg-[#282828] text-gray-300 hover:bg-[#3E3E3E]'
                   }`}
                 >
-                  {/* Artist Image */}
+                  {/* cargamos la imagen del artista*/}
                   {artist.images && artist.images.length > 0 ? (
                     <img
                       src={artist.images[2]?.url || artist.images[0]?.url}
@@ -208,7 +208,7 @@ export default function ArtistWidget({ onSelect, selectedItems = [] }) {
                     </div>
                   )}
 
-                  {/* Artist Info */}
+                  {/* seguidores*/}
                   <div className="flex-1 text-left">
                     <p className="font-medium">{artist.name}</p>
                     {artist.followers && (
@@ -218,7 +218,7 @@ export default function ArtistWidget({ onSelect, selectedItems = [] }) {
                     )}
                   </div>
 
-                  {/* Checkmark */}
+                  {/* checar*/}
                   {isSelected && (
                     <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
                       <svg className="w-4 h-4 text-[#1DB954]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

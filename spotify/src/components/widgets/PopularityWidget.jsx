@@ -86,7 +86,6 @@ export default function PopularityWidget({ onSelect, selectedItems = {} }) {
         Elige entre hits mainstream o descubrimientos underground
       </p>
 
-      {/* Mode Toggle */}
       <div className="flex gap-2 mb-6">
         <button
           onClick={switchToSlider}
@@ -110,7 +109,7 @@ export default function PopularityWidget({ onSelect, selectedItems = {} }) {
         </button>
       </div>
 
-      {/* Slider Mode */}
+
       {mode === 'slider' && (
         <div className="space-y-4">
           <div>
@@ -121,7 +120,7 @@ export default function PopularityWidget({ onSelect, selectedItems = {} }) {
               </span>
             </div>
 
-            {/* Slider */}
+
             <input
               type="range"
               min="0"
@@ -138,14 +137,14 @@ export default function PopularityWidget({ onSelect, selectedItems = {} }) {
               }}
             />
 
-            {/* Labels */}
+
             <div className="flex justify-between text-xs text-gray-500 mt-1">
               <span>0 (Underground)</span>
               <span>100 (Mainstream)</span>
             </div>
           </div>
 
-          {/* Info */}
+          {/* Informacion */}
           <div className="p-3 bg-[#282828] rounded-lg">
             <p className="text-gray-400 text-sm">
               Se buscarán canciones con popularidad de <span className="text-white font-medium">{sliderValue}</span> a <span className="text-white font-medium">100</span>
@@ -154,7 +153,7 @@ export default function PopularityWidget({ onSelect, selectedItems = {} }) {
         </div>
       )}
 
-      {/* Category Mode */}
+      {/* categoria*/}
       {mode === 'category' && (
         <div className="space-y-3">
           {POPULARITY_CATEGORIES.map(category => {
@@ -197,7 +196,7 @@ export default function PopularityWidget({ onSelect, selectedItems = {} }) {
         </div>
       )}
 
-      {/* Current Selection Summary */}
+      {/* seleccion*/}
       <div className="mt-6 p-4 bg-[#282828] rounded-lg">
         <p className="text-gray-400 text-sm mb-1">Configuración actual:</p>
         {mode === 'slider' ? (

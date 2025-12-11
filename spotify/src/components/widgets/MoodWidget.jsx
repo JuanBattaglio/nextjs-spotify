@@ -115,7 +115,7 @@ export default function MoodWidget({ onSelect, selectedItems = {} }) {
         Ajusta las características de audio de tu playlist
       </p>
 
-      {/* Mood Presets */}
+
       <div className="mb-6">
         <p className="text-white text-sm font-medium mb-3">Presets rápidos:</p>
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -132,11 +132,10 @@ export default function MoodWidget({ onSelect, selectedItems = {} }) {
         </div>
       </div>
 
-      {/* Audio Feature Sliders */}
+      {/* Audio*/}
       <div className="space-y-6">
         {AUDIO_FEATURES.map(feature => (
           <div key={feature.key}>
-            {/* Label & Value */}
             <div className="flex items-center justify-between mb-2">
               <div>
                 <p className="text-white font-medium text-sm">{feature.label}</p>
@@ -146,8 +145,6 @@ export default function MoodWidget({ onSelect, selectedItems = {} }) {
                 {values[feature.key]}
               </span>
             </div>
-
-            {/* Slider */}
             <div className="relative">
               <input
                 type="range"
@@ -166,7 +163,7 @@ export default function MoodWidget({ onSelect, selectedItems = {} }) {
               />
             </div>
 
-            {/* Min/Max Labels */}
+            {/* Minimo Maximo*/}
             <div className="flex justify-between text-xs text-gray-500 mt-1">
               <span>0</span>
               <span>100</span>
@@ -175,7 +172,7 @@ export default function MoodWidget({ onSelect, selectedItems = {} }) {
         ))}
       </div>
 
-      {/* Current Values Summary */}
+      {/* valores actuales*/}
       <div className="mt-6 p-4 bg-[#282828] rounded-lg">
         <p className="text-gray-400 text-sm mb-2">Configuración actual:</p>
         <div className="grid grid-cols-2 gap-2 text-sm">

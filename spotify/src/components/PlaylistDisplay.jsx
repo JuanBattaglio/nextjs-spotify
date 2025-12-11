@@ -257,7 +257,7 @@ export default function PlaylistDisplay({ preferences }) {
         )}
       </div>
 
-      {/* Generate Button */}
+      {/* boton generador*/}
       {playlist.length === 0 && !loading && (
         <div className="text-center py-12">
           <p className="text-gray-400 mb-6">
@@ -272,7 +272,7 @@ export default function PlaylistDisplay({ preferences }) {
         </div>
       )}
 
-      {/* Loading */}
+      {/* carga */}
       {loading && (
         <div className="flex flex-col items-center justify-center py-12">
           <div className="w-12 h-12 border-4 border-[#1DB954] border-t-transparent rounded-full animate-spin mb-4"></div>

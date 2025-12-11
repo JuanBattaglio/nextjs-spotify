@@ -62,8 +62,6 @@ export default function GenreWidget({ onSelect, selectedItems = [] }) {
     
     onSelect(newSelection);
   };
-
-  // Limpiar selección
   const handleClear = () => {
     onSelect([]);
   };
@@ -90,7 +88,7 @@ export default function GenreWidget({ onSelect, selectedItems = [] }) {
         {selectedItems.length} / {MAX_SELECTIONS} géneros seleccionados
       </p>
 
-      {/* Search Input */}
+      {/* buscador*/}
       <div className="mb-4">
         <input
           type="text"
@@ -101,7 +99,7 @@ export default function GenreWidget({ onSelect, selectedItems = [] }) {
         />
       </div>
 
-      {/* Selected Genres (if any) */}
+      {/* generos*/}
       {selectedItems.length > 0 && (
         <div className="mb-4">
           <p className="text-gray-400 text-sm mb-2">Seleccionados:</p>
@@ -120,7 +118,7 @@ export default function GenreWidget({ onSelect, selectedItems = [] }) {
         </div>
       )}
 
-      {/* Genres Grid */}
+      {/* genros grid*/}
       <div className="max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {filteredGenres.map(genre => {
